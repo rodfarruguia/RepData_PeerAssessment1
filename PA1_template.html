@@ -118,27 +118,31 @@ $(document).ready(function () {
 <li>Load the data (i.e. read.csv())</li>
 <li>Process/transform the data (if necessary) into a format suitable for your analysis.</li>
 </ol>
-<p>needed library and setting echo to true</p>
+<p>needed libraries and setting echo to true</p>
 <pre class="r"><code>library(&quot;knitr&quot;)
 opts_chunk$set(echo = TRUE, results = 'hold')</code></pre>
 <pre class="r"><code>library(&quot;xtable&quot;)
-library(&quot;ggplot2&quot;)</code></pre>
+require(&quot;dplyr&quot;)</code></pre>
+<pre><code>## Loading required package: dplyr</code></pre>
+<pre><code>## Warning in library(package, lib.loc = lib.loc, character.only = TRUE,
+## logical.return = TRUE, : there is no package called 'dplyr'</code></pre>
+<pre class="r"><code>require(&quot;tidyr&quot;)</code></pre>
+<pre><code>## Loading required package: tidyr</code></pre>
+<pre><code>## Warning in library(package, lib.loc = lib.loc, character.only = TRUE,
+## logical.return = TRUE, : there is no package called 'tidyr'</code></pre>
+<pre class="r"><code>library(&quot;ggplot2&quot;)</code></pre>
 <p>Reading in the csv, remove NA values and store it in data.</p>
 <pre class="r"><code>unzip(&quot;activity.zip&quot;)
 data &lt;- read.csv(&quot;activity.csv&quot;, sep=&quot;,&quot;, header = TRUE, stringsAsFactors = FALSE, na.strings = &quot;NA&quot;)</code></pre>
 <p>Display the data, a use to sellect a number of data entries from the head.</p>
-<pre class="r"><code>head(data, 10)</code></pre>
-<pre><code>##    steps       date interval
-## 1     NA 2012-10-01        0
-## 2     NA 2012-10-01        5
-## 3     NA 2012-10-01       10
-## 4     NA 2012-10-01       15
-## 5     NA 2012-10-01       20
-## 6     NA 2012-10-01       25
-## 7     NA 2012-10-01       30
-## 8     NA 2012-10-01       35
-## 9     NA 2012-10-01       40
-## 10    NA 2012-10-01       45</code></pre>
+<pre class="r"><code>head(data)</code></pre>
+<pre><code>##   steps       date interval
+## 1    NA 2012-10-01        0
+## 2    NA 2012-10-01        5
+## 3    NA 2012-10-01       10
+## 4    NA 2012-10-01       15
+## 5    NA 2012-10-01       20
+## 6    NA 2012-10-01       25</code></pre>
 </div>
 <div id="what-is-mean-total-number-of-steps-taken-per-day" class="section level2">
 <h2>What is mean total number of steps taken per day?</h2>

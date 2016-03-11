@@ -10,7 +10,7 @@ keep_md: true
  1. Load the data (i.e. read.csv())
  2. Process/transform the data (if necessary) into a format suitable for your analysis.
  
-needed library and setting echo to true
+needed libraries and setting echo to true
 
 ```{r}
 library("knitr")
@@ -19,6 +19,8 @@ opts_chunk$set(echo = TRUE, results = 'hold')
 
 ```{r}
 library("xtable")
+require("dplyr")
+require("tidyr")
 library("ggplot2")
 ```
 
@@ -32,7 +34,7 @@ data <- read.csv("activity.csv", sep=",", header = TRUE, stringsAsFactors = FALS
  Display the data, a use to sellect a number of data entries from the head.
  
 ```{r}
-head(data, 10)
+head(data)
 ```
 
 
