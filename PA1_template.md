@@ -334,7 +334,6 @@ final_data <- aggregate(steps ~ interval + week, data = new_data_filling_NA, mea
 
 ```r
 xyplot(steps ~ interval | week, final_data, type = "l", xlab = "Interval", ylab = "Number of steps", main = "Average steps, averaged across all weekday days or weekend days", layout = c(1, 2))
-
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-27-1.png)
