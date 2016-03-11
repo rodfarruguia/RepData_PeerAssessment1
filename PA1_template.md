@@ -6,7 +6,8 @@
  1. Load the data (i.e. read.csv())
  2. Process/transform the data (if necessary) into a format suitable for your analysis.
  
-needed library and setting echo to true
+needed libraries and setting echo to true
+
 
 ```r
 library("knitr")
@@ -16,6 +17,32 @@ opts_chunk$set(echo = TRUE, results = 'hold')
 
 ```r
 library("xtable")
+require("dplyr")
+```
+
+```
+## Loading required package: dplyr
+```
+
+```
+## Warning in library(package, lib.loc = lib.loc, character.only = TRUE,
+## logical.return = TRUE, : there is no package called 'dplyr'
+```
+
+```r
+require("tidyr")
+```
+
+```
+## Loading required package: tidyr
+```
+
+```
+## Warning in library(package, lib.loc = lib.loc, character.only = TRUE,
+## logical.return = TRUE, : there is no package called 'tidyr'
+```
+
+```r
 library("ggplot2")
 ```
 
@@ -28,33 +55,32 @@ data <- read.csv("activity.csv", sep=",", header = TRUE, stringsAsFactors = FALS
 ```
 
  Display the data, a use to sellect a number of data entries from the head.
+ 
 
 ```r
-head(data, 10)
+head(data)
 ```
 
 ```
-##    steps       date interval
-## 1     NA 2012-10-01        0
-## 2     NA 2012-10-01        5
-## 3     NA 2012-10-01       10
-## 4     NA 2012-10-01       15
-## 5     NA 2012-10-01       20
-## 6     NA 2012-10-01       25
-## 7     NA 2012-10-01       30
-## 8     NA 2012-10-01       35
-## 9     NA 2012-10-01       40
-## 10    NA 2012-10-01       45
+##   steps       date interval
+## 1    NA 2012-10-01        0
+## 2    NA 2012-10-01        5
+## 3    NA 2012-10-01       10
+## 4    NA 2012-10-01       15
+## 5    NA 2012-10-01       20
+## 6    NA 2012-10-01       25
 ```
 
-#--------------------------------------------------------------------
+
 ## What is mean total number of steps taken per day?
 
 Extract complete cases and store them in datasteps.
 
+
 ```r
 datasteps <- data[complete.cases(data),]
 ```
+
  1. Calculate the total number of steps taken per day.
 
 
@@ -88,7 +114,7 @@ total_steps_per_day
 
 
 ```r
-hist(total_steps_per_day, col="red", xlab = "Steps per Day", main = "Number of Steps per Day")
+plot1 <- hist(total_steps_per_day, col="red", xlab = "Steps per Day", main = "Number of Steps per Day")
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-7-1.png)
@@ -127,9 +153,9 @@ median_total
 ## [1] 10765
 ```
 
-#---------------------------------------------------------------------
 
 ## What is the average daily activity pattern?
+
 
 ```r
 data_pattern <- data[complete.cases(data),]
@@ -143,15 +169,20 @@ data_pattern <- data[complete.cases(data),]
 ##        35        40        45 
 ## 0.8679245 0.0000000 1.4716981
 ```
+
  1. Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
+ 
 # Plot of average daily activity
 
+
 ```r
-plot(names(daily_activity), daily_activity, type = "l", xlab = "5 minute Interval", ylab = "Average Number of Steps Taken Througout the Days", main = "Average Daily Activity", col = "red")
+plot2 <- plot(names(daily_activity), daily_activity, type = "l", xlab = "5 minute Interval", ylab = "Average Number of Steps Taken Througout the Days", main = "Average Daily Activity", col = "red")
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-12-1.png)
+
  2. Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
+ 
 
 ```r
 largest_n_steps_interval <- which.max(daily_activity)
@@ -161,12 +192,14 @@ names(largest_n_steps_interval)
 ```
 ## [1] "835"
 ```
-# -----------------------------------------------------------------
+
 
 ## Imputing missing values
+
  1. Calculate and report the total number of missing values in the dataset (i.e. the total number of rows with NAs) 
  
 # Number of missing values stores in number_na.
+
 
 ```r
 number_na <- sum(!(complete.cases(data)))
@@ -176,7 +209,6 @@ number_na
 ```
 ## [1] 2304
 ```
-
 
  2. Devise a strategy for filling in all of the missing values in the dataset. The strategy does not need to be sophisticated. For example, you could use the mean/median for that day, or the mean for that 5-minute interval, etc. and 
  3. create a new dataset that is equal to the original dataset but with the missing data filled in. asign each NA value the average number of steps for all days as calculated in previous steps.
@@ -190,6 +222,7 @@ new_data_filling_NA <- data
         }
     }   
 ```
+
  4. Make a histogram of the total number of steps taken each day and Calculate and report the mean and median total number of steps taken per day. Do these values # differ from the estimates from the first part of the assignment? What is the impact of imputing missing data on the estimates of the total daily number of steps?
  
 
@@ -197,11 +230,13 @@ new_data_filling_NA <- data
 total_steps_per_day2 <- tapply(new_data_filling_NA$steps, new_data_filling_NA$date, sum)
 ```
 
+
 ```r
-hist(total_steps_per_day2, col = "blue",xlab = "Steps taken per Day", main = "Average number of Steps per Day\n With Filled in Missing Values")
+plot3 <- hist(total_steps_per_day2, col = "blue",xlab = "Steps taken per Day", main = "Average number of Steps per Day\n With Filled in Missing Values")
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-17-1.png)
+
 
 ```r
 summary(total_steps_per_day2)
@@ -227,6 +262,7 @@ mean_total2
 
 # median_total of steps with filled in missing values
 
+
 ```r
 median_total2 <- median(total_steps_per_day2)
 median_total2
@@ -247,6 +283,7 @@ mean_total2 - mean_total
 ```
 # difference in median between filled in and not filled in.
 
+
 ```r
 median_total2 - median_total
 ```
@@ -255,7 +292,6 @@ median_total2 - median_total
 ## [1] 1.188679
 ```
 
-#----------------------------------------------------------------------
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
@@ -291,20 +327,14 @@ new_data_filling_NA$week <- week
 ```
 
 
- 
-
 ```r
 final_data <- aggregate(steps ~ interval + week, data = new_data_filling_NA, mean)
 ```
 
 
 ```r
-xyplot(steps ~ interval | week, final_data
-     , type = "l"
-     , xlab = "Interval"
-     , ylab = "Number of steps"
-     , main = "Average steps, averaged across all weekday days or weekend days"
-     , layout = c(1, 2))
+plot4 <- xyplot(steps ~ interval | week, final_data, type = "l", xlab = "Interval", ylab = "Number of steps", main = "Average steps, averaged across all weekday days or weekend days", layout = c(1, 2))
+plot(plot4)
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-27-1.png)
