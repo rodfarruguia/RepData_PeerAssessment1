@@ -20,6 +20,9 @@ opts_chunk$set(echo = TRUE, results = 'hold')
 ```{r}
 library("xtable")
 library("ggplot2")
+library("lubridate")
+library("data.table")
+library("dplyr"")
 ```
 
  Reading in the  csv, remove NA values and store it in data.
