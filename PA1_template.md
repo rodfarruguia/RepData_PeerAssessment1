@@ -114,7 +114,7 @@ total_steps_per_day
 
 
 ```r
-plot1 <- hist(total_steps_per_day, col="red", xlab = "Steps per Day", main = "Number of Steps per Day")
+hist(total_steps_per_day, col="red", xlab = "Steps per Day", main = "Number of Steps per Day")
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-7-1.png)
@@ -176,7 +176,7 @@ data_pattern <- data[complete.cases(data),]
 
 
 ```r
-plot2 <- plot(names(daily_activity), daily_activity, type = "l", xlab = "5 minute Interval", ylab = "Average Number of Steps Taken Througout the Days", main = "Average Daily Activity", col = "red")
+plot(names(daily_activity), daily_activity, type = "l", xlab = "5 minute Interval", ylab = "Average Number of Steps Taken Througout the Days", main = "Average Daily Activity", col = "red")
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-12-1.png)
@@ -232,7 +232,7 @@ total_steps_per_day2 <- tapply(new_data_filling_NA$steps, new_data_filling_NA$da
 
 
 ```r
-plot3 <- hist(total_steps_per_day2, col = "blue",xlab = "Steps taken per Day", main = "Average number of Steps per Day\n With Filled in Missing Values")
+hist(total_steps_per_day2, col = "blue",xlab = "Steps taken per Day", main = "Average number of Steps per Day\n With Filled in Missing Values")
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-17-1.png)
@@ -333,8 +333,8 @@ final_data <- aggregate(steps ~ interval + week, data = new_data_filling_NA, mea
 
 
 ```r
-plot4 <- xyplot(steps ~ interval | week, final_data, type = "l", xlab = "Interval", ylab = "Number of steps", main = "Average steps, averaged across all weekday days or weekend days", layout = c(1, 2))
-plot(plot4)
+xyplot(steps ~ interval | week, final_data, type = "l", xlab = "Interval", ylab = "Number of steps", main = "Average steps, averaged across all weekday days or weekend days", layout = c(1, 2))
+
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-27-1.png)
