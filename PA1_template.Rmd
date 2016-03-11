@@ -20,9 +20,6 @@ opts_chunk$set(echo = TRUE, results = 'hold')
 ```{r}
 library("xtable")
 library("ggplot2")
-library("lubridate")
-library("data.table")
-library("dplyr"")
 ```
 
  Reading in the  csv, remove NA values and store it in data.
@@ -200,12 +197,7 @@ new_data_filling_NA$week <- week
 final_data <- aggregate(steps ~ interval + week, data = new_data_filling_NA, mean)
 ```
 
-```{r}
-xyplot(steps ~ interval | week, final_data
-     , type = "l"
-     , xlab = "Interval"
-     , ylab = "Number of steps"
-     , main = "Average steps, averaged across all weekday days or weekend days"
-     , layout = c(1, 2))
+```{r, echo = FALSE}
+xyplot(steps ~ interval | week, final_data, type = "l", xlab = "Interval", ylab = "Number of steps", main = "Average steps, averaged across all weekday days or weekend days", layout = c(1, 2))
 
 ```
